@@ -1,0 +1,72 @@
+---
+## Server
+server:
+  port: 8084
+
+## Management
+management:
+  server:
+    port: 8085
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    git:
+      mode: "full"
+spring:
+  jmx:
+    enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306
+    username: "{cipher}*username*"
+    password: "{cipher}**password**"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+# Exclude
+whitelist:
+  actuator: /actuator/**
+
+## Logging
+logging:
+  level:
+    org.springframework.security: "DEBUG"
+    org.springframework.jdbc: "DEBUG"
+
+## Hystrix
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000000  
+            interruptOnTimeout: false
+      circuitBreaker:
+        enabled: false
+      fallback:
+        enabled: false
+
+## Ribbon
+ribbon:
+  ConnectTimeout: 1000000
+  ReadTimeout: 1000000
+
+# config de ejecución (con llaves en sistema de archivos)
+key:
+  public: /opt/auth-server/public.pem
+  private: /opt/auth-server/private.pem
+
+## Eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

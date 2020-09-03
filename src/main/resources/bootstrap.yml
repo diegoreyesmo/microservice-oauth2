@@ -1,0 +1,18 @@
+---
+## Spring
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: "auth-server"
+  cloud:
+    ## Config
+    config:
+      uri: "http://localhost:8888"
+      fail-fast: true
+      username: "config-server-dev"
+      password: "6pEv6FL7NL#by(v"
+
+logging:
+  file:
+    path: "/opt/no-sql/logs"
